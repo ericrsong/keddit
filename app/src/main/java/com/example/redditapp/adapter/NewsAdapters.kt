@@ -45,12 +45,14 @@ class NewsAdapters: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         return items.size
     }
 
+    // This calls each method for corresponding delegate adapters
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         // get(0) get the first element in delegateAdapters, and then call its
         // method onCreateViewHolder. Then call get(1)
         return delegateAdapters.get(viewType)!!.onCreateViewHolder(parent)
     }
 
+    // This calls each method for corresponding delegate adapters
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         delegateAdapters.get(getItemViewType(position))?.onBindViewHolder(holder,this.items[position])
     }

@@ -4,6 +4,8 @@ package com.example.redditapp.commons
 
 import java.util.*
 
+// reddit returns time as a Long. This extension function modify the time into human
+// readable time (i.e. 2 minutes ago instead of 120 seconds ago).
 fun Long.getFriendlyTime(): String {
     val dateTime = Date(this * 1000)
     val sb = StringBuffer()

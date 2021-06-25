@@ -1,6 +1,6 @@
 # Keddit
 
-This is based on Juan Ignacio Saravia's [keddit](https://github.com/juanchosaravia/KedditBySteps)
+This is based on Juan Ignacio Saravia's [keddit](https://github.com/juanchosaravia/KedditBySteps).
 
 ## Feature
 

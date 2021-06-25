@@ -13,28 +13,6 @@ import com.example.redditapp.commons.loadImage
 
 class NewsDelegateAdapter: ViewTypeDelegateAdapter {
 
-//    class ItemViewHolder(private val view: View) {
-//        val img_thumbnail: ImageView = view.findViewById(R.id.img_thumbnail)
-//        val description : TextView = view.findViewById(R.id.description)
-//        val author: TextView = view.findViewById(R.id.author)
-//        val comments: TextView = view.findViewById(R.id.comments)
-//        val time: TextView = view.findViewById(R.id.time)
-//    }
-
-    override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
-//        val adapterLayout = LayoutInflater.from(parent.context)
-//            .inflate(R.layout.news_item,parent,false)
-//        return ItemViewHolder(adapterLayout)
-        return TurnsViewHolder(parent)
-    }
-
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, item: ViewType) {
-        val tmpHolder = holder as TurnsViewHolder
-//        // here we update each View
-//        // Question: how will item be passed in?
-        tmpHolder.bind(holder,item as RedditNewsItem)
-    }
-
     class TurnsViewHolder(parent: ViewGroup):
         RecyclerView.ViewHolder(
             // we used the extension function that we wrote in commons/Extensions.kt
@@ -54,4 +32,14 @@ class NewsDelegateAdapter: ViewTypeDelegateAdapter {
             textView4.text = created.getFriendlyTime()
         }
     }
+
+    override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
+        return TurnsViewHolder(parent)
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, item: ViewType) {
+        val tmpHolder = holder as TurnsViewHolder
+        tmpHolder.bind(holder,item as RedditNewsItem)
+    }
+
 }
