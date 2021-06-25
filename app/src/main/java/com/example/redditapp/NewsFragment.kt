@@ -47,8 +47,8 @@ class NewsFragment:Fragment() {
         initAdapter()
 
         val news = (1..10).map {RedditNewsItem(
-            "author it",
-            "Title it",
+            "author $it",
+            "Title $it",
             it,
             1457207701L - it * 200,
             "https://picsum.photos/200/300",

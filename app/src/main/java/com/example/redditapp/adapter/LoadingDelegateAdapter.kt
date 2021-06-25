@@ -8,6 +8,10 @@ import com.example.redditapp.commons.inflate
 
 class LoadingDelegateAdapter: ViewTypeDelegateAdapter {
 
+    class TurnsViewHolder(parent: ViewGroup):
+        RecyclerView.ViewHolder(
+            // we used the extension function that we wrote in commons/Extensions.kt
+            parent.inflate(R.layout.news_item_loading))
 
     override fun onCreateViewHolder(parent: ViewGroup) =
         TurnsViewHolder(parent)
@@ -16,9 +20,4 @@ class LoadingDelegateAdapter: ViewTypeDelegateAdapter {
         item: ViewType
     ) {}
 
-    class TurnsViewHolder(parent: ViewGroup):
-        RecyclerView.ViewHolder(
-            // we used the extension function that we wrote in commons/Extensions.kt
-            parent.inflate(R.layout.news_item_loading)) {
-    }
 }

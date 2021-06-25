@@ -38,7 +38,7 @@ class NewsDelegateAdapter: ViewTypeDelegateAdapter {
     class TurnsViewHolder(parent: ViewGroup):
         RecyclerView.ViewHolder(
             // we used the extension function that we wrote in commons/Extensions.kt
-            parent.inflate(R.layout.news_item_loading)) {
+            parent.inflate(R.layout.news_item)) {
 
         fun bind(holder: RecyclerView.ViewHolder, item: RedditNewsItem) = with(item){
             val ITEMVIEW = holder.itemView

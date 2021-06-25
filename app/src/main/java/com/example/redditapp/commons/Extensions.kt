@@ -3,6 +3,7 @@
 package com.example.redditapp.commons
 
 import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,8 +21,10 @@ fun ViewGroup.inflate(layoutId: Int, attachToRoot: Boolean = false): View {
 fun ImageView.loadImage(imageUrl: String) {
     if (TextUtils.isEmpty(imageUrl)) {
         Picasso.get().load(R.mipmap.ic_launcher).into(this)
+        Log.e("LoadImage", "Success")
     } else {
         Picasso.get().load(imageUrl).into(this)
+        Log.e("LoadImage", "Failure")
     }
 
 }

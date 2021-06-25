@@ -29,12 +29,12 @@ class NewsAdapters: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     init {
         delegateAdapters.put(
-            AdapterConstants.LOADING
-                , LoadingDelegateAdapter()
+            AdapterConstants.LOADING // key: Int
+                , LoadingDelegateAdapter() // value: ViewTypeDelegateAdapter
         )
         delegateAdapters.put(
-            AdapterConstants.NEWS
-                , NewsDelegateAdapter()
+            AdapterConstants.NEWS // key
+                , NewsDelegateAdapter() // value
         )
         items = ArrayList()
         items.add(loadingItem)
@@ -46,6 +46,8 @@ class NewsAdapters: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        // get(0) get the first element in delegateAdapters, and then call its
+        // method onCreateViewHolder. Then call get(1)
         return delegateAdapters.get(viewType)!!.onCreateViewHolder(parent)
     }
 

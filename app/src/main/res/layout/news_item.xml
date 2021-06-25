@@ -21,11 +21,10 @@
     <!-- Description -->
     <TextView
         android:id="@+id/description"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/description"
-        android:layout_alignStart="@id/description"
-        android:layout_below="@id/description"
+        android:layout_alignTop="@id/img_thumbnail"
+        android:layout_toRightOf="@id/img_thumbnail"
         android:textColor="#040404"
         android:textSize="15sp"
         android:textStyle="bold"

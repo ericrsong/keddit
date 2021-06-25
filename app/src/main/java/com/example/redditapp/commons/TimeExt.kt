@@ -39,37 +39,37 @@ fun Long.getFriendlyTime(): String {
         }
         if (month>0) {
             if (month == 1) {
-                sb.append("and a month")
+                sb.append(" and a month")
             } else {
-                sb.append("and $month months")
+                sb.append(" and $month months")
             }
         }
         if (day>0) {
             if (day == 1) {
-                sb.append("and a day")
+                sb.append(" and a day")
             } else {
-                sb.append("and $day days")
+                sb.append(" and $day days")
             }
         }
         if (hour>0) {
             if (hour == 1) {
-                sb.append("and an hour")
+                sb.append(" and an hour")
             } else {
-                sb.append("and $hour hours")
+                sb.append(" and $hour hours")
             }
         }
         if (min >0) {
             if (min == 1) {
-                sb.append("and a min")
+                sb.append(" and a min")
             } else {
-                sb.append("and $min minutes")
+                sb.append(" and $min minutes")
             }
         }
         if (sec >0) {
             if (sec == 1) {
-                sb.append("and a sec")
+                sb.append(" and a sec")
             } else {
-                sb.append("and $sec secs")
+                sb.append(" and $sec secs")
             }
         }
     }
