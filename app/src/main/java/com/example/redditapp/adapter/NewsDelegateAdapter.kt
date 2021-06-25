@@ -44,13 +44,13 @@ class NewsDelegateAdapter: ViewTypeDelegateAdapter {
             val ITEMVIEW = holder.itemView
             val imageView: ImageView = ITEMVIEW.findViewById(R.id.img_thumbnail)
             imageView.loadImage(thumbnail)
-            val textView1: TextView = holder.itemView.findViewById(R.id.description)
+            val textView1: TextView = ITEMVIEW.findViewById(R.id.description)
             textView1.text = title
-            val textView2: TextView = holder.itemView.findViewById(R.id.author)
+            val textView2: TextView = ITEMVIEW.findViewById(R.id.author)
             textView2.text = author
-            val textView3: TextView = holder.itemView.findViewById(R.id.comments)
+            val textView3: TextView = ITEMVIEW.findViewById(R.id.comments)
             textView3.text = "${numOfComments} comments"
-            val textView4: TextView = holder.itemView.findViewById(R.id.time)
+            val textView4: TextView = ITEMVIEW.findViewById(R.id.time)
             textView4.text = created.getFriendlyTime()
         }
     }
