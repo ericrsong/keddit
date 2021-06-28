@@ -11,6 +11,8 @@ import com.example.redditapp.adapter.NewsAdapters
 import com.example.redditapp.databinding.NewsFragmentBinding
 
 class NewsFragment:Fragment() {
+    private val newsManager by lazy { NewsManager() }
+
     private val newsList: RecyclerView by lazy {
         binding.newList
     }
@@ -45,17 +47,25 @@ class NewsFragment:Fragment() {
         newsList.layoutManager = LinearLayoutManager(context)
 
         initAdapter()
+        if (savedInstanceState == null ) {
+//            val news = (1..10).map {
+//                RedditNewsItem(
+//                    "author $it",
+//                    "Title $it",
+//                    it,
+//                    1457207701L - it * 200,
+//                    "https://picsum.photos/200/300",
+//                    "url"
+//
+//                )
+//            }
+//            (newsList.adapter as NewsAdapters).addNews(news)
+            requestNews()
+        }
+    }
 
-        val news = (1..10).map {RedditNewsItem(
-            "author $it",
-            "Title $it",
-            it,
-            1457207701L - it * 200,
-            "https://picsum.photos/200/300",
-            "url"
-
-        )}
-        (newsList.adapter as NewsAdapters).addNews(news)
+    private fun requestNews() {
+        TODO()
     }
 
     private fun initAdapter() {
