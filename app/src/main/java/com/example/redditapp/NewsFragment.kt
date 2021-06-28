@@ -11,10 +11,13 @@ import com.example.redditapp.adapter.NewsAdapters
 import com.example.redditapp.databinding.NewsFragmentBinding
 import com.google.android.material.snackbar.Snackbar
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 
 class NewsFragment:Fragment() {
     private val newsManager by lazy { NewsManager() }
+
+    private var subscriptions = CompositeDisposable()
 
     private val newsList: RecyclerView by lazy {
         binding.newList
@@ -67,6 +70,17 @@ class NewsFragment:Fragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        var subscriptions = CompositeDisposable()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (!subscriptions.isDisposed) subscriptions.dispose()
+        subscriptions.clear()
+    }
+
     private fun requestNews() {
 
         val subscription = newsManager.getNews()
@@ -82,6 +96,7 @@ class NewsFragment:Fragment() {
                     Snackbar.make(newsList, e.message ?: "", Snackbar.LENGTH_LONG).show()
                 }
             )
+        subscriptions.add(subscription)
     }
 
     private fun initAdapter() {
