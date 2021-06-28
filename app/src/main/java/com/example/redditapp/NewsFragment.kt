@@ -9,6 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.redditapp.adapter.NewsAdapters
 import com.example.redditapp.databinding.NewsFragmentBinding
+import com.google.android.material.snackbar.Snackbar
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
 
 class NewsFragment:Fragment() {
     private val newsManager by lazy { NewsManager() }
@@ -65,7 +68,20 @@ class NewsFragment:Fragment() {
     }
 
     private fun requestNews() {
-        TODO()
+
+        val subscription = newsManager.getNews()
+            .subscribeOn(Schedulers.io()) // start another thread to separate tasks
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    retrievedNews ->
+                    (newsList.adapter as NewsAdapters).addNews(retrievedNews)
+                },
+                {
+                    e ->
+                    Snackbar.make(newsList, e.message ?: "", Snackbar.LENGTH_LONG).show()
+                }
+            )
     }
 
     private fun initAdapter() {
