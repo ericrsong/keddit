@@ -1,25 +1,28 @@
 package com.example.redditapp
 
+import com.example.redditapp.api.RestAPI
 import io.reactivex.rxjava3.core.Observable
 
-class NewsManager {
+class NewsManager(private val api: RestAPI = RestAPI()) {
 
-    fun getNews(): Observable<List<RedditNewsItem>> {
+    fun getNews(limit: String="10"): Observable<List<RedditNewsItem>> {
         return Observable.create{
-            subscriber ->
+                subscriber ->
+            val callResponse = api.getNews("",limit)
+            val response = callResponse.execute()
 
-            val news = (1..10).map {
-                RedditNewsItem(
-                    "author $it",
-                    "Title $it",
-                    it,
-                    1457207701L - it * 200,
-                    "https://picsum.photos/200/300",
-                    "url"
+            if (response.isSuccessful) {
 
-                )
+                val news = response.body()?.data?.children?.map {
+                    val item = it.data
+                    RedditNewsItem(item.author,item.title,item.num_comments,
+                        item.created, item.thumbnail, item.url)
+                }
+                subscriber.onNext(news)
+                subscriber.onComplete()
+            } else {
+                subscriber.onError(Throwable(response.message()))
             }
-            subscriber.onNext(news)
         }
     }
 }

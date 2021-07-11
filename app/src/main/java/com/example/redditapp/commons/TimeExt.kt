@@ -2,11 +2,13 @@
 
 package com.example.redditapp.commons
 
+import android.util.Log
 import java.util.*
 
 // reddit returns time as a Long. This extension function modify the time into human
 // readable time (i.e. 2 minutes ago instead of 120 seconds ago).
 fun Long.getFriendlyTime(): String {
+    Log.v("TimeExt","Time converted")
     val dateTime = Date(this * 1000)
     val sb = StringBuffer()
     val current = Calendar.getInstance().time
