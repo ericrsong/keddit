@@ -64,7 +64,7 @@ class NewsAdapters: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     fun addNews(newsItems: List<RedditNewsItem>) {
         val initPosition = items.lastIndex
         items.addAll(initPosition, newsItems)
-        notifyItemRangeInserted(initPosition, initPosition + newsItems.size)
+        this.notifyDataSetChanged()
     }
 
     fun clearAndAddNews(newsItems: List<RedditNewsItem>) {
