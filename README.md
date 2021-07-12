@@ -5,3 +5,4 @@ This is based on Juan Ignacio Saravia's [keddit](https://github.com/juanchosarav
 ## Feature
 
 - Use ViewBinding instead of kotlin android extension
+- Time accounts for time zone difference

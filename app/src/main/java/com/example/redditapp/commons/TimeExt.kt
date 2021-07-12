@@ -8,7 +8,6 @@ import java.util.*
 // reddit returns time as a Long. This extension function modify the time into human
 // readable time (i.e. 2 minutes ago instead of 120 seconds ago).
 fun Long.getFriendlyTime(): String {
-    Log.v("TimeExt","Time converted")
     val dateTime = Date(this * 1000)
     val sb = StringBuffer()
     val current = Calendar.getInstance().time
@@ -35,49 +34,54 @@ fun Long.getFriendlyTime(): String {
     diffInSeconds /= 12
     val year = diffInSeconds
 
-    if (year > 0) {
+    if (year>0) {
         if (year == 1) {
-            sb.append("a year")
+            sb.append("a year ago")
         } else {
-            sb.append("$year years")
+            sb.append("$year years ago")
         }
-        if (month>0) {
-            if (month == 1) {
-                sb.append(" and a month")
-            } else {
-                sb.append(" and $month months")
-            }
-        }
-        if (day>0) {
-            if (day == 1) {
-                sb.append(" and a day")
-            } else {
-                sb.append(" and $day days")
-            }
-        }
-        if (hour>0) {
-            if (hour == 1) {
-                sb.append(" and an hour")
-            } else {
-                sb.append(" and $hour hours")
-            }
-        }
-        if (min >0) {
-            if (min == 1) {
-                sb.append(" and a min")
-            } else {
-                sb.append(" and $min minutes")
-            }
-        }
-        if (sec >0) {
-            if (sec == 1) {
-                sb.append(" and a sec")
-            } else {
-                sb.append(" and $sec secs")
-            }
-        }
+        return sb.toString()
     }
-
-    sb.append(" ago")
-    return sb.toString()
+    if (month>0) {
+        if (month == 1) {
+            sb.append("a month ago")
+        } else {
+            sb.append("$month months ago")
+        }
+        return sb.toString()
+    }
+    if (day>0) {
+        if (day == 1) {
+            sb.append("a day ago")
+        } else {
+            sb.append("$day days ago")
+        }
+        return sb.toString()
+    }
+    if (hour>0) {
+        if (hour == 1) {
+            sb.append("an hour ago")
+        } else {
+            sb.append("$hour hours ago")
+        }
+        return sb.toString()
+    }
+    if (min >0) {
+        if (min == 1) {
+            sb.append("a min ago")
+        } else {
+            sb.append("$min minutes ago")
+        }
+        return sb.toString()
+    }
+    if (sec >0) {
+        if (sec == 1) {
+            sb.append("a sec ago")
+        } else {
+            sb.append("$sec secs ago")
+        }
+        return sb.toString()
+    }
+    Log.v("TimeExt", diffInSeconds.toString())
+    return "There is a bug in time"
 }
