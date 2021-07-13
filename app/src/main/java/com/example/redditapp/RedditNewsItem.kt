@@ -3,6 +3,12 @@ package com.example.redditapp
 import com.example.redditapp.adapter.AdapterConstants
 import com.squareup.moshi.Json
 
+data class RedditNews(
+    val after: String,
+    val before: String,
+    val news: List<RedditNewsItem>
+)
+
 data class RedditNewsItem(
     var author: String,
     var title: String,

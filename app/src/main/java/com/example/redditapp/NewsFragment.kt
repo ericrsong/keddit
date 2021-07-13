@@ -15,6 +15,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 
 class NewsFragment:Fragment() {
+    private var redditNews:RedditNews? = null
     private val newsManager by lazy { NewsManager() }
 
     private var subscriptions = CompositeDisposable()
@@ -50,7 +51,11 @@ class NewsFragment:Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         newsList.setHasFixedSize(true)
-        newsList.layoutManager = LinearLayoutManager(context)
+
+        val linearLayout = LinearLayoutManager(context)
+        newsList.layoutManager = linearLayout
+        newsList.clearOnScrollListeners()
+        newsList.addOnScrollListener(InfiniteScrollListerner({requestNews()}, linearLayout))
 
         initAdapter()
         if (savedInstanceState == null ) {
@@ -82,14 +87,20 @@ class NewsFragment:Fragment() {
     }
 
     private fun requestNews() {
-
-        val subscription = newsManager.getNews()
+        /**
+         * first time will send empty string for after parameter
+         * Next time, we will have redditNews set with the next
+         * page to navigate with after param.
+         */
+        val subscription = newsManager.getNews(redditNews?.after ?: "")
             .subscribeOn(Schedulers.io()) // start another thread to separate tasks
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 {
                     retrievedNews ->
-                    (newsList.adapter as NewsAdapters).addNews(retrievedNews)
+//                    (newsList.adapter as NewsAdapters).addNews(retrievedNews)
+                    redditNews = retrievedNews
+                    (newsList.adapter as NewsAdapters).addNews(retrievedNews.news)
                 },
                 {
                     e ->
